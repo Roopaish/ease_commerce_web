@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=Jacques+Francois+Shadow&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #ffffff;
+}
+
+h1 {
+  font-size: 57px;
+  line-height: 64px;
+  letter-spacing: -0.25px;
+}
+
+h2 {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+h3 {
+  font-size: 22px;
+  line-height: 28px;
+}
+
+p,
+input {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+span {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px 40px;
+}
+
+header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+}
+
+main{
+  padding-top: 50px;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 45px;
+    line-height: 52px;
+  }
+  h2 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  h3 {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  p,
+  input {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  span {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  .container {
+    padding: 15px 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  h1 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+  h2 {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  h3 {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  p,
+  input {
+    font-size: 12px;
+    line-height: 16px;
+  }
+  span {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}
+
+/* Common Styles */
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-center {
+  justify-content: center;
+}
