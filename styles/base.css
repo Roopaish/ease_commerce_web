@@ -28,7 +28,8 @@ h3 {
 }
 
 p,
-input {
+input,
+button {
   font-size: 16px;
   line-height: 24px;
 }
@@ -44,7 +45,7 @@ span {
   padding: 15px 40px;
 }
 
-header{
+header {
   position: fixed;
   top: 0;
   left: 0;
@@ -52,8 +53,8 @@ header{
   background-color: white;
 }
 
-main{
-  padding-top: 50px;
+main {
+  padding-top: 150px;
 }
 
 @media (max-width: 768px) {
@@ -70,7 +71,8 @@ main{
     line-height: 24px;
   }
   p,
-  input {
+  input,
+  button {
     font-size: 14px;
     line-height: 20px;
   }
@@ -80,6 +82,9 @@ main{
   }
   .container {
     padding: 15px 20px;
+  }
+  main {
+    padding-top: 100px;
   }
 }
 
@@ -97,7 +102,8 @@ main{
     line-height: 20px;
   }
   p,
-  input {
+  input,
+  button {
     font-size: 12px;
     line-height: 16px;
   }

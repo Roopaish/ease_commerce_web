@@ -14,6 +14,7 @@
   background-color: transparent;
   outline: none;
   border: none;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -30,7 +31,6 @@
 .products-carousel .content {
   display: flex;
   gap: 20px;
-  padding-top: 50px;
 
   overflow: hidden;
   overflow-x: scroll;
@@ -72,4 +72,16 @@
   padding: 5px 15px;
   border-radius: 5px;
   width: max-content;
+}
+
+/* Button */
+button {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.link-button {
+  color: var(--primary);
 }
