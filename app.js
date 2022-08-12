@@ -1,4 +1,5 @@
-const apiUrl = "http://localhost:3000/";
+// const apiUrl = "http://localhost:3000/";
+const apiUrl = "https://ease-commerce.herokuapp.com/";
 const darazSearchUrl = (name) => `${apiUrl}daraz?name=${name}`;
 
 const darazProductListEl = document.querySelector(
