@@ -6,7 +6,6 @@ class Daraz {
   static getItems = async (name) => {
     try {
       const { data } = await axios.get(this.searchUrl(name));
-
       const matchedData = data.match(/window.pageData=(.+)<\/script>/)[0];
       const wantedData = matchedData
         .replace("window.pageData=",'')
