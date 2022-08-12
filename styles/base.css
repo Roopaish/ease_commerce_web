@@ -35,12 +35,12 @@ button {
 }
 
 span {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 20px;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1920px;
   margin: 0 auto;
   padding: 15px 40px;
 }
@@ -51,10 +51,11 @@ header {
   left: 0;
   right: 0;
   background-color: white;
+  z-index: 100;
 }
 
 main {
-  padding-top: 150px;
+  padding-top: 100px;
 }
 
 @media (max-width: 768px) {
@@ -77,14 +78,14 @@ main {
     line-height: 20px;
   }
   span {
-    font-size: 12px;
+    font-size: 14px;
     line-height: 16px;
   }
   .container {
     padding: 15px 20px;
   }
   main {
-    padding-top: 100px;
+    padding-top: 80px;
   }
 }
 
@@ -108,7 +109,7 @@ main {
     line-height: 16px;
   }
   span {
-    font-size: 11px;
+    font-size: 14px;
     line-height: 16px;
   }
 }

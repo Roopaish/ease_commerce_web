@@ -20,92 +20,51 @@
   <link rel="stylesheet" href="./styles/base.css" />
   <link rel="stylesheet" href="./styles/components.css" />
 
+  <script src="app.js" defer></script>
+
 <body>
   <header>
     <div class="container">
-      <!-- <h3>ease_commerce</h3> -->
-      <div class="search-box flex justify-start">
-        <i class="lni lni-search-alt "></i>
-        <input type="text" placeholder="Search for products" />
-      </div>
+      <form class="search-form">
+        <div class="search-box flex justify-start">
+          <i class="lni lni-search-alt "></i>
+          <input type="text" placeholder="Search for products" />
+        </div>
+      </form>
     </div>
   </header>
 
   <main>
-    <section class="container">
-      <h1 style="margin-bottom: 10px;">Recommended Products</h1>
-      <div class="flex">
-        <h3>Daraz</h3>
-        <button type="button" class="link-button">See all</button>
-      </div>
-      <div class="products-carousel">
-        <div class="content">
-          <div class="product">
-            <div class="product-image">
-              <img src="./assets/images/logo.png" alt="product-1" />
-            </div>
-            <div class="product-details">
-              <h4>Product Name</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quos.</p>
-              <div class="product-price">
-                <span>$100</span>
-              </div>
-            </div>
-          </div>
-          <div class="product">
-            <div class="product-image">
-              <img src="./assets/images/logo.png" alt="product-1" />
-            </div>
-            <div class="product-details">
-              <h4>Product Name</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quos.</p>
-              <div class="product-price">
-                <span>$100</span>
-              </div>
-            </div>
-          </div>
-          <div class="product">
-            <div class="product-image">
-              <img src="./assets/images/logo.png" alt="product-1" />
-            </div>
-            <div class="product-details">
-              <h4>Product Name</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quos.</p>
-              <div class="product-price">
-                <span>$100</span>
-              </div>
-            </div>
-          </div>
-          <div class="product">
-            <div class="product-image">
+    <!-- <h1 class="page-title container">Recommended Products</h1> -->
+
+    <div class="container carousel-lists">
+      <section class="daraz">
+        <div class="flex ">
+          <div class="store">
+            <div class="store-icon">
               <img
-                src="data:image/jpeg;base64,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"
-                alt="product-1" />
+                src="https://play-lh.googleusercontent.com/QoiGnvynjBjtraueo9bqoSceqfJb6oMRmHl4qMd3D6qXzb5egnqS2HPmSVK0eSoUQIQ"
+                alt="daraz-logo" />
             </div>
-            <div class="product-details">
-              <h4>Product Name</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quos.</p>
-              <div class="product-price">
-                <span>$100</span>
-              </div>
-            </div>
+            <h3 class="store-name">Daraz</h3>
           </div>
-          <div class="product">
-            <div class="product-image">
-              <img src="./assets/images/logo.png" alt="product-1" />
-            </div>
-            <div class="product-details">
-              <h4>Product Name</h4>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quos.</p>
-              <div class="product-price">
-                <span>$100</span>
-              </div>
-            </div>
-          </div>
+          <!-- <button type="button" class="link-button">See all</button> -->
         </div>
-      </div>
-      <img src='http://dev.menzz.co/assets/machismocreamwaxproduct.webp' alt="okok" />
-    </section>
+        <div class="products-carousel">
+          <div class="content fancy-scroll-bar"></div>
+      </section>
+
+      <section class="amazon">
+        <div class="flex">
+          <h3 class="store-name">Hamrobazar</h3>
+          <!-- <button type="button" class="link-button">See all</button> -->
+        </div>
+        <div class="products-carousel">
+          <div class="content fancy-scroll-bar"></div>
+        </div>
+      </section>
+
+    </div>
   </main>
 </body>
 
