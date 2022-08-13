@@ -184,10 +184,11 @@ button {
   cursor: pointer;
 }
 
-.link-button {
+.link-button, a {
   color: #06c;
   font-weight: 500;
   text-transform: uppercase;
+  text-decoration: none;
 }
 
 /* Loader */
@@ -270,4 +271,80 @@ button {
   background-color: #585858;
   border-radius: 10px;
   cursor: pointer;
+}
+
+/* Modal */
+.modal{
+  position: fixed;
+  bottom: -80vh;
+  min-height: 20vh;
+  max-height: 80vh;
+  width: 100%;
+  background-color: #f2f2f2;
+  border-radius: 20px 20px 0 0;
+  padding-bottom: 50px;
+  overflow-y: scroll;
+  transition: .3s ease-in-out;
+}
+
+.modal .close-button{
+  position: fixed;
+  right: 20px;
+  background-color: white;
+  margin: 20px;
+  border-radius: 1000px;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show{
+  bottom: 0;
+}
+
+.modal.hide{
+  bottom: -80vh;
+}
+
+.modal h3{
+  padding-top: 50px;
+  padding-right: 50px;
+}
+
+.product-info-grid{
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.product-info-grid figure{
+  width: 50%;
+  max-width: 400px;
+}
+
+.product-info-grid figure img{
+  border-radius: 20px;
+}
+
+.product-info-grid .product-info{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product-info-grid span{
+  font-weight: 600;
+}
+
+@media screen and (max-width: 800px) {
+  .product-info-grid{
+    flex-direction: column;
+  }
+  .product-info-grid figure{
+    width: 100%;
+  }
 }
