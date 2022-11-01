@@ -1,39 +1,38 @@
-// const apiUrl = "http://localhost:3000/";
-const apiUrl = "https://ease-commerce.herokuapp.com/";
-const darazSearchUrl = (name) => `${apiUrl}daraz?name=${name}`;
+const apiUrl = "http://localhost:8800/";
+// const apiUrl = "https://ease-commerce.herokuapp.com/";
+const darazSearchUrl = (name) => `${apiUrl}api/product/daraz/${name}`;
+const amazonSearchUrl = (name) => `${apiUrl}api/product/amazon/${name}`;
 
 const darazProductListEl = document.querySelector(
   ".daraz .products-carousel .content"
+);
+const amazonProductListEl = document.querySelector(
+  ".amazon .products-carousel .content"
 );
 const searchFormEl = document.querySelector(".search-form");
 const searchInputEl = document.querySelector(".search-box input");
 const modalEl = document.querySelector(".modal");
 let productEls = document.querySelectorAll(".product");
-let productsData = [];
+let darazProducts = [];
+let amazonProducts = [];
 // const pageTitleEl = document.querySelector(".page-title");
 
-const generateProductListItem = (item) => {
-  const {
-    name,
-    nid,
-    image,
-    productUrl,
-    priceShow,
-    description,
-    sellerName,
-    price,
-  } = item;
-  // description = <String>[]
+const generateProductListItem = (item, vendor) => {
+  const { name, nid, image, priceShow, ratingScore, review } = item;
   return `
-    <div class="product" data-id=${nid}>
+    <div class="product" data-id=${nid} data-vendor={}>
       <div class="product-image">
         <img src=${image} alt=${name} />
       </div>
       <div class="product-details">
         <h4 class="product-name">${name}</h4>
         <div class="product-price">
-          <span>${priceShow}</span>
+          <span>${priceShow ?? ""}</span>
         </div>
+        <div class="product-price">
+        <span>Rating: ${ratingScore ?? "0"} by ${review ?? "0"} reviewers</span>
+      </div>
+        
       </div>
     </div>
   `;
@@ -66,10 +65,12 @@ const generateLoadingUI = () => {
 };
 
 // Modal Actions
-const openModal = (productId) => {
+const openProductDetailModal = (productId, vendor) => {
   modalEl.classList.remove("hide");
   modalEl.classList.add("show");
-  const item = productsData.find((e) => e.nid == productId);
+  const item = (vendor == "daraz" ? darazProducts : amazonProducts).find(
+    (e) => e.nid == productId
+  );
   const { name, image, priceShow, sellerName, description, productUrl } = item;
 
   let desEl = ``;
@@ -124,16 +125,43 @@ const getItemsFromDaraz = async (name) => {
     const data = await res.json();
 
     darazProductListEl.innerHTML = "";
-    data.mods.listItems.forEach((item) => {
-      darazProductListEl.innerHTML += generateProductListItem(item);
+    data.listItems.forEach((item) => {
+      darazProductListEl.innerHTML += generateProductListItem(
+        item,
+        (vendor = "daraz")
+      );
     });
 
     darazProductListEl.style.cssText = "overflow-x:scroll;";
-    productsData = data.mods.listItems;
+    darazProducts = data.listItems;
   } catch (e) {
     darazProductListEl.innerHTML = generateNotFoundUI();
   }
-  fetchNewlyAddedProductsEls();
+  applyEventHandlingToProducts();
+};
+
+const getItemsFromAmazon = async (name) => {
+  try {
+    // pageTitleEl.innerHTML = `Search Results for <div style='font-style:italic; display:inline; font-weight:600;'>"${name}"</div>`;
+    amazonProductListEl.style.cssText = "overflow-x:hidden;";
+    amazonProductListEl.innerHTML = generateLoadingUI();
+    const res = await fetch(amazonSearchUrl(name));
+    const data = await res.json();
+
+    amazonProductListEl.innerHTML = "";
+    data.listItems.forEach((item) => {
+      amazonProductListEl.innerHTML += generateProductListItem(
+        item,
+        (vendor = "amazon")
+      );
+    });
+
+    amazonProductListEl.style.cssText = "overflow-x:scroll;";
+    amazonProducts = data.listItems;
+  } catch (e) {
+    amazonProductListEl.innerHTML = generateNotFoundUI();
+  }
+  applyEventHandlingToProducts();
 };
 
 searchFormEl.addEventListener("submit", async (e) => {
@@ -142,18 +170,21 @@ searchFormEl.addEventListener("submit", async (e) => {
   searchInputEl.blur();
   const name = searchInputEl.value;
   await getItemsFromDaraz(name);
+  await getItemsFromAmazon(name);
 });
 
 addEventListener("DOMContentLoaded", () => {
   getItemsFromDaraz("laptop");
+  getItemsFromAmazon("laptop");
 });
 
-const fetchNewlyAddedProductsEls = () => {
+const applyEventHandlingToProducts = () => {
   productEls = document.querySelectorAll(".product");
   productEls.forEach((productEl) => {
     productEl.addEventListener("click", (e) => {
       const productId = productEl.getAttribute("data-id");
-      openModal(productId);
+      const vendor = productEl.getAttribute("data-vendor");
+      openProductDetailModal(productId, vendor);
     });
   });
 };

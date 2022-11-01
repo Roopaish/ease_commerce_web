@@ -1,42 +1,52 @@
-const Daraz = require("./daraz");
-const http = require("http");
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
+import mongoose from "mongoose";
 
-const PORT = process.env.PORT ?? 3000;
-const server = http.createServer(async (req, res) => {
-  await handleRequests(req, res);
+// import routes (name as you want cause they are default exports)
+import productRoutes from "./routes/product.route.js";
+
+// initialization
+const app = express();
+dotenv.config();
+
+const connectDB = () => {
+  mongoose
+    .connect(process.env.MONGO)
+    .then(() => {
+      console.log("Connected to DB");
+    })
+    .catch((e) => {
+      throw e;
+    });
+};
+
+// Take json as req body
+app.use(express.json());
+
+// Enable the use of cookies
+app.use(cookieParser());
+
+// Enable cors
+app.use(cors());
+
+// registering routes
+app.use("/api/product", productRoutes);
+
+// middleware to handle exception
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  const message = err.message || "Something went wrong";
+
+  return res.status(status).json({
+    success: false,
+    status, //eqv. status: status
+    message,
+  });
 });
-// const corsOrigin = 'http://127.0.0.1:5500';
-// const corsOrigin = "https://roopaish.github.io/";
-const corsOrigin = "*";
 
-const header = {
-  "Content-Type": "application/json",
-  "Access-Control-Allow-Origin": `${corsOrigin}`,
-};
-
-const handleRequests = async (req, res) => {
-  // Daraz api requests
-  if (req.url.startsWith("/daraz") && req.method === "GET") {
-    try {
-      const name = req.url.match(/name=(.+)/)[1] ?? "";
-      const data = await Daraz.getItems(name);
-
-      res.writeHead(200, header);
-      res.write(JSON.stringify(data));
-      res.end();
-    } catch (e) {
-      res.writeHead(404, header);
-      res.end(JSON.stringify({ message: "Something went wrong!" }));
-    }
-  }
-
-  // No route response
-  else {
-    res.writeHead(404, header);
-    res.end(JSON.stringify({ message: "Route not found" }));
-  }
-};
-
-server.listen(PORT, () => {
-  console.log(`Server running at PORT:${PORT}/`);
+app.listen(8800, () => {
+  connectDB();
+  console.log("Connected to server!");
 });
