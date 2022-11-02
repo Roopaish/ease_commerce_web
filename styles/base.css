@@ -28,8 +28,7 @@ h3 {
 }
 
 p,
-input,
-button {
+input {
   font-size: 16px;
   line-height: 24px;
 }
@@ -43,6 +42,12 @@ span {
   max-width: 1920px;
   margin: 0 auto;
   padding: 15px 40px;
+}
+
+.fixed-button {
+  position: fixed;
+  right: 40px;
+  z-index: 1;
 }
 
 header {
@@ -72,8 +77,7 @@ main {
     line-height: 24px;
   }
   p,
-  input,
-  button {
+  input {
     font-size: 14px;
     line-height: 20px;
   }
@@ -83,6 +87,9 @@ main {
   }
   .container {
     padding: 15px 20px;
+  }
+  .fixed-button {
+    right: 20px;
   }
   main {
     padding-top: 80px;
@@ -103,8 +110,7 @@ main {
     line-height: 20px;
   }
   p,
-  input,
-  button {
+  input {
     font-size: 12px;
     line-height: 16px;
   }

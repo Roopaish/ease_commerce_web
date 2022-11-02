@@ -49,7 +49,6 @@
 
   overflow: hidden;
   overflow-x: hidden;
-  position: relative;
   padding-bottom: 30px;
 }
 
@@ -63,6 +62,23 @@
   background-color: #f2f2f2;
   border-radius: 20px;
   cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+.product.compare-mode .product-image {
+  padding: 20px;
+}
+
+.product.compare-mode .product-selector {
+  display: block;
+}
+
+.product-selector {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: none;
 }
 
 .product-image {
@@ -72,6 +88,8 @@
   margin: 10px;
   background-color: white;
   border-radius: 20px;
+  transition: all 0.3s ease-in-out;
+  position: relative;
 }
 
 .product-image img {
@@ -115,8 +133,8 @@
   color: #06c;
 }
 
-@media screen and (max-width:640px) {
-  .product-image{
+@media screen and (max-width: 640px) {
+  .product-image {
     width: 250px;
   }
   .product-details {
@@ -177,14 +195,19 @@ img {
 }
 
 /* Button */
-button {
-  outline: none;
+button.primary {
+  background: var(--primary);
+  color: white;
   border: none;
-  background-color: transparent;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
   cursor: pointer;
+  transition: 0.3s ease-in-out;
 }
 
-.link-button, a {
+.link-button,
+a {
   color: #06c;
   font-weight: 500;
   text-transform: uppercase;
@@ -258,6 +281,7 @@ button {
 /* width */
 .fancy-scroll-bar::-webkit-scrollbar {
   height: 10px;
+  width: 10px;
 }
 
 /* Track */
@@ -274,7 +298,7 @@ button {
 }
 
 /* Modal */
-.modal{
+.modal {
   position: fixed;
   bottom: -80vh;
   min-height: 20vh;
@@ -284,10 +308,10 @@ button {
   border-radius: 20px 20px 0 0;
   padding-bottom: 50px;
   overflow-y: scroll;
-  transition: .3s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
-.modal .close-button{
+.modal .close-button {
   position: fixed;
   right: 20px;
   background-color: white;
@@ -301,50 +325,191 @@ button {
   align-items: center;
 }
 
-.modal.show{
+.modal.show {
   bottom: 0;
 }
 
-.modal.hide{
+.modal.hide {
   bottom: -80vh;
 }
 
-.modal h3{
+.modal h3 {
   padding-top: 50px;
   padding-right: 50px;
 }
 
-.product-info-grid{
+.product-info-grid {
   display: flex;
   align-items: flex-start;
   gap: 20px;
   margin-top: 40px;
 }
 
-.product-info-grid figure{
+.product-info-grid figure {
   width: 50%;
   max-width: 400px;
 }
 
-.product-info-grid figure img{
+.product-info-grid figure img {
   border-radius: 20px;
 }
 
-.product-info-grid .product-info{
+.product-info-grid .product-info {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.product-info-grid span{
+.product-info-grid span {
   font-weight: 600;
 }
 
 @media screen and (max-width: 800px) {
-  .product-info-grid{
+  .product-info-grid {
     flex-direction: column;
   }
-  .product-info-grid figure{
+  .product-info-grid figure {
     width: 100%;
   }
+}
+
+/* Switch */
+input[type="checkbox"] {
+  display: none;
+}
+.toggle-item + label {
+  display: flex;
+  font-size: 7px;
+  width: 5em;
+  height: 3em;
+  background: #aaa;
+  border-radius: 50px;
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: inset 0 0 5px #222;
+}
+.toggle-item + label:after {
+  content: "";
+  position: absolute;
+  width: 2.5em;
+  height: 2.5em;
+  background: #fff;
+  border-radius: 50%;
+  top: 0.25em;
+  left: 0.25em;
+  transition: all 0.2s ease;
+}
+.toggle-item:checked + label {
+  background: var(--primary);
+}
+.toggle-item:checked + label:after {
+  left: 2.4em;
+}
+
+/* Custom checkbox */
+
+.form-group {
+  /* display: block; */
+  margin-bottom: 15px;
+}
+
+.form-group input {
+  padding: 0;
+  height: initial;
+  width: initial;
+  margin-bottom: 0;
+  display: none;
+  cursor: pointer;
+}
+
+.form-group label {
+  position: relative;
+  cursor: pointer;
+}
+
+.form-group label:before {
+  content: "";
+  -webkit-appearance: none;
+  background-color: transparent;
+  border: 2px solid #0079bf;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+    inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  padding: 10px;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.form-group input:checked + label:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 9px;
+  width: 6px;
+  height: 14px;
+  border: solid #0079bf;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+Table table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 10px 10px 0 0;
+}
+
+td > div {
+  max-height: 200px;
+  min-width: 300px;
+  overflow-y: auto;
+}
+
+td > div::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+td > div::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #f2f2f2;
+}
+
+/* Handle */
+td > div::-webkit-scrollbar-thumb {
+  background-color: #585858;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 20px;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: var(--primary);
+  color: white;
+}
+
+td .product-info img {
+  width: 50px;
+  height: 50px;
+  border-radius: 1000px;
 }

@@ -25,7 +25,7 @@ export const getDarazProducts = async (req, res, next) => {
         description: el.description,
         productUrl: el.productUrl,
         price: el.price,
-        ratingScore: el.rating,
+        ratingScore: el.ratingScore,
         review: el.review,
       });
     });
@@ -35,7 +35,6 @@ export const getDarazProducts = async (req, res, next) => {
       listItems: items,
     });
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };
@@ -49,7 +48,8 @@ export const getAmazonProducts = async (req, res, next) => {
     const { data } = await axios.get(searchUrl, {
       headers: {
         Accept: "application/json",
-        "User-Agent": "axios 0.21.1",
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0",
       },
     });
     const $ = cheerio.load(data);
@@ -64,15 +64,18 @@ export const getAmazonProducts = async (req, res, next) => {
       const rating = $(el).find(".aok-align-bottom .a-icon-alt").text();
       const review = $(el).find(".s-link-style .s-underline-text").text();
       const nid = $(el).find(".sg-col-inner > div").attr("data-csa-c-item-id");
-      var descArray = description.split("|").map((e) => e.split(","));
+      var descArray = description.replaceAll("|", ",").split(",");
       items.push({
         image: image,
-        priceShow: price == "" ? null : `$ ${price}/-`,
+        priceShow:
+          price == ""
+            ? null
+            : `$ ${price} ~ Rs, ${Math.round(price.replaceAll(",", "") * 130)}`,
         name: descArray[0],
         nid: nid,
         sellerName: "",
         description: descArray,
-        productUrl: link,
+        productUrl: "https://www.amazon.com/" + link,
         price: price,
         ratingScore: rating.split(" ")[0],
         review: review,
