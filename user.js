@@ -32,7 +32,7 @@ signupForm.addEventListener("submit", (e) => {
   const email = signupForm["signup-email"].value;
   const password = signupForm["signup-password"].value;
 
-  fetch("http://localhost:8800/api/auth/signup", {
+  fetch(`${apiUrl}/api/auth/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -68,7 +68,7 @@ signinForm.addEventListener("submit", async (e) => {
   const name = signinForm["signin-name"].value;
   const password = signinForm["signin-password"].value;
 
-  const res = await fetch("http://localhost:8800/api/auth/signin", {
+  const res = await fetch(`${apiUrl}/api/auth/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
