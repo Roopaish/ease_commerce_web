@@ -11,11 +11,12 @@ body {
   background-color: #ffffff;
 }
 
-ul{
+ul {
   margin-left: 20px;
 }
 
-p,ul,
+p,
+ul,
 input {
   font-size: 16px;
   line-height: 24px;
@@ -128,6 +129,9 @@ main {
   }
   main {
     padding-top: 80px;
+  }
+  main.more {
+    padding-top: 150px;
   }
 }
 
