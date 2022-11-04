@@ -1,4 +1,5 @@
-const apiUrl = "http://localhost:8800/";
+// const apiUrl = "http://localhost:8800/";
+const apiUrl = "https://ease-commerce.herokuapp.com/";
 
 var currentUser = null;
 const imgEl = document.getElementById("user-image");

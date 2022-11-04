@@ -1,4 +1,3 @@
-// const apiUrl = "https://ease-commerce.herokuapp.com/";
 const darazSearchUrl = (name) => `${apiUrl}api/product/daraz/${name}`;
 const amazonSearchUrl = (name) => `${apiUrl}api/product/amazon/${name}`;
 var currentProduct = null;
