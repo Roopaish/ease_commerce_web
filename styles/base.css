@@ -11,23 +11,11 @@ body {
   background-color: #ffffff;
 }
 
-h1 {
-  font-size: 57px;
-  line-height: 64px;
-  letter-spacing: -0.25px;
+ul{
+  margin-left: 20px;
 }
 
-h2 {
-  font-size: 32px;
-  line-height: 40px;
-}
-
-h3 {
-  font-size: 22px;
-  line-height: 28px;
-}
-
-p,
+p,ul,
 input {
   font-size: 16px;
   line-height: 24px;
@@ -36,6 +24,57 @@ input {
 span {
   font-size: 16px;
   line-height: 20px;
+}
+
+h1 {
+  font-weight: bold;
+  margin: 0;
+}
+
+h2 {
+  text-align: center;
+}
+
+.alt-text {
+  font-size: 12px;
+  padding: 20px;
+  color: var(--primary);
+  cursor: pointer;
+  display: none;
+}
+
+a {
+  color: #333;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+button {
+  white-space: nowrap;
+  border-radius: 5px;
+  border: 1px solid var(--primary);
+  background-color: var(--primary);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:focus {
+  outline: none;
+}
+
+button.ghost {
+  background-color: transparent;
+  border-color: #ffffff;
 }
 
 .container {
@@ -48,6 +87,14 @@ span {
   position: fixed;
   right: 40px;
   z-index: 1;
+}
+
+.hidden {
+  display: none !important;
+  width: 0;
+  height: 0;
+  min-height: 0;
+  min-width: 0;
 }
 
 header {
@@ -64,18 +111,6 @@ main {
 }
 
 @media (max-width: 768px) {
-  h1 {
-    font-size: 45px;
-    line-height: 52px;
-  }
-  h2 {
-    font-size: 28px;
-    line-height: 36px;
-  }
-  h3 {
-    font-size: 16px;
-    line-height: 24px;
-  }
   p,
   input {
     font-size: 14px;
@@ -97,18 +132,6 @@ main {
 }
 
 @media (max-width: 576px) {
-  h1 {
-    font-size: 36px;
-    line-height: 44px;
-  }
-  h2 {
-    font-size: 24px;
-    line-height: 32px;
-  }
-  h3 {
-    font-size: 14px;
-    line-height: 20px;
-  }
   p,
   input {
     font-size: 12px;
@@ -137,4 +160,8 @@ main {
 
 .justify-center {
   justify-content: center;
+}
+
+.wrap {
+  flex-wrap: wrap;
 }

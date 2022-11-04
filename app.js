@@ -1,7 +1,8 @@
-const apiUrl = "http://localhost:8800/";
 // const apiUrl = "https://ease-commerce.herokuapp.com/";
 const darazSearchUrl = (name) => `${apiUrl}api/product/daraz/${name}`;
 const amazonSearchUrl = (name) => `${apiUrl}api/product/amazon/${name}`;
+var currentProduct = null;
+var selectedProducts = [];
 
 const darazProductListEl = document.querySelector(
   ".daraz .products-carousel .content"
@@ -20,12 +21,11 @@ let amazonProducts = [];
 var isBeingCompared = false;
 
 const generateProductListItem = (item, vendor) => {
-  const { name, nid, image, priceShow, ratingScore, review } = item;
+  const { name, id, image, priceShow, ratingScore, review } = item;
   return `
-    <div class="product" data-id=${nid} data-vendor=${vendor}>
+    <div class="product" data-id=${id} data-vendor=${vendor}>
       <div class="product-image">
-        <img src=${image} alt=${name} />
-        
+        <img src=${image} alt=${name} loading="lazy" />
       </div>
       <div class="product-details">
         <h4 class="product-name">${name ?? "No name specified"}</h4>
@@ -39,8 +39,8 @@ const generateProductListItem = (item, vendor) => {
         </div>
       </div>
       <div class="form-group product-selector">
-        <input type="checkbox" class="product-checkbox" id=${nid} data-id=${nid} data-vendor=${vendor}>
-        <label for=${nid}></label>
+        <input type="checkbox" class="product-checkbox" id=${id} data-id=${id} data-vendor=${vendor}>
+        <label for=${id}></label>
       </div>
     </div>
   `;
@@ -77,8 +77,9 @@ const openProductDetailModal = (productId, vendor) => {
   modalEl.classList.remove("hide");
   modalEl.classList.add("show");
   const item = (vendor == "daraz" ? darazProducts : amazonProducts).find(
-    (e) => e.nid == productId
+    (e) => e.id == productId
   );
+  currentProduct = item;
   const { name, image, priceShow, sellerName, description, productUrl } = item;
 
   let desEl = ``;
@@ -105,15 +106,23 @@ const openProductDetailModal = (productId, vendor) => {
           <div>
             <span>SellerName:</span> ${sellerName}
           </div>
-          <p>
+          <ul>
             ${desEl}
-          </p>
+          </ul>
           <p>
             <a href=${productUrl} target="_blank">Go to Official site</a>
           </p>
         </div>
       </div>
+      ${
+        currentUser != null
+          ? `<button class="product-save-button" onCLick="saveProduct()">
+        Save <i class="lni lni-save"></i>
+      </button>`
+          : ``
+      }
     </div>
+    
   `;
 
   const modalCloseButtonEl = document.querySelector(".close-button");
@@ -172,7 +181,7 @@ searchFormEl.addEventListener("submit", async (e) => {
   searchInputEl.blur();
   const name = searchInputEl.value;
   await getItemsFromDaraz(name);
-  // await getItemsFromAmazon(name);
+  await getItemsFromAmazon(name);
 });
 
 addEventListener("DOMContentLoaded", () => {
@@ -206,6 +215,9 @@ modeEl.addEventListener("change", (e) => {
 });
 
 const startCompareMode = () => {
+  document.querySelectorAll(".product-checkbox").forEach((checkbox) => {
+    checkbox.checked = false;
+  });
   productEls = document.querySelectorAll(".product");
   productEls.forEach((productEl) => {
     productEl.classList.add("compare-mode");
@@ -222,22 +234,23 @@ const endCompareMode = () => {
 };
 
 compareBtnEl.addEventListener("click", () => {
-  const productCheckboxes = document.querySelectorAll(".product-checkbox");
+  productCheckboxes = document.querySelectorAll(".product-checkbox");
+  compareBtnEl.classList.remove("fixed-button");
 
-  const selectedProducts = [];
+  selectedProducts = [];
   productCheckboxes.forEach((checkbox) => {
     if (checkbox.checked) {
       const productId = checkbox.getAttribute("data-id");
       const vendor = checkbox.getAttribute("data-vendor");
       const item = (vendor == "daraz" ? darazProducts : amazonProducts).find(
-        (e) => e.nid == productId
+        (e) => e.id == productId
       );
       selectedProducts.push(item);
     }
   });
 
   if (selectedProducts.length < 2) {
-    alert("Please select at least 2 products to compare");
+    showNotification("Please select at least 2 products to compare");
     return;
   }
 
@@ -247,6 +260,7 @@ compareBtnEl.addEventListener("click", () => {
   modalCloseButtonEl.addEventListener("click", () => {
     modalEl.classList.add("hide");
     modalEl.classList.remove("show");
+    compareBtnEl.classList.add("fixed-button");
   });
 
   modalEl.classList.add("show");
@@ -288,7 +302,7 @@ const generateCompareTable = (selectedProducts) => {
         <td>
           <div class="product-info">
             <img src=${product.image} alt=${product.name} />
-            <div>
+            <div class='description'>
               <h4>${product.name}</h4>
               <p>by ${product.sellerName}</p>
             </div>
@@ -297,7 +311,7 @@ const generateCompareTable = (selectedProducts) => {
         <td>${product.priceShow}</td>
         <td>${product.ratingScore}</td>
         <td>${product.review}</td>
-        <td><div>${desEl}</div></td>
+        <td><div class='description'>${desEl}</div></td>
         <td><a href="${product.productUrl}" target="_blank">Buy</a></td>
       </tr>
     `;
@@ -306,8 +320,46 @@ const generateCompareTable = (selectedProducts) => {
   table += `
       </tbody>
     </table>
+    ${
+      currentUser != null
+        ? `<button class="comparisons-save-button" onCLick="saveComparisons()">
+      Save Comparison <i class="lni lni-save"></i>
+    </button>`
+        : ``
+    }
   </div>
   `;
 
   return table;
+};
+
+const saveProduct = async () => {
+  const res = await fetch(`${apiUrl}api/user/product/${currentUser._id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(currentProduct),
+    credentials: "include",
+  });
+
+  const data = await res.json();
+  handleData(data, res, "Product saved successfully");
+};
+
+const saveComparisons = async () => {
+  const res = await fetch(`${apiUrl}api/user/comparison/${currentUser._id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: searchInputEl.value,
+      products: selectedProducts,
+    }),
+    credentials: "include",
+  });
+
+  const data = await res.json();
+  handleData(data, res, "Comparison saved successfully");
 };

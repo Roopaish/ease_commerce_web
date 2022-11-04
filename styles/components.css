@@ -1,12 +1,27 @@
 @import url("variables.css");
 
+/* User */
+.user-image-wrapper {
+  height: 54px;
+  width: 54px;
+  border-radius: 2px;
+  overflow: hidden;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
 /* Search Input */
 .search-box {
   padding: 15px 26px;
   background-color: var(--gray-fill);
   width: 100%;
   border-radius: 4px;
-
   gap: 10px;
 }
 
@@ -20,6 +35,17 @@
 @media (max-width: 768px) {
   .search-box {
     padding: 11px 26px;
+  }
+  .user-image-wrapper {
+    height: 42px;
+    width: 42px;
+  }
+}
+
+@media (max-width: 576px) {
+  .user-image-wrapper {
+    height: 38px;
+    width: 38px;
   }
 }
 
@@ -50,6 +76,7 @@
   overflow: hidden;
   overflow-x: hidden;
   padding-bottom: 30px;
+  overflow-x: scroll;
 }
 
 .product {
@@ -61,7 +88,6 @@
   gap: 20px;
   background-color: #f2f2f2;
   border-radius: 20px;
-  cursor: pointer;
   transition: all 0.3s ease-in-out;
   position: relative;
 }
@@ -100,6 +126,7 @@
 }
 
 .product-details {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -129,7 +156,7 @@
   font-weight: 400;
 }
 
-.product:hover .product-name {
+.product-details:hover .product-name {
   color: #06c;
 }
 
@@ -153,6 +180,9 @@
 .store-icon {
   width: 40px;
   height: 40px;
+  font-size: 40px;
+  font-weight: bold;
+  color: var(--primary);
 }
 
 .store-name {
@@ -463,24 +493,24 @@ Table table {
   border-radius: 10px 10px 0 0;
 }
 
-td > div {
+.description {
   max-height: 200px;
   min-width: 300px;
   overflow-y: auto;
 }
 
-td > div::-webkit-scrollbar {
+.description::-webkit-scrollbar {
   width: 10px;
 }
 
 /* Track */
-td > div::-webkit-scrollbar-track {
+.description::-webkit-scrollbar-track {
   border-radius: 10px;
   background: #f2f2f2;
 }
 
 /* Handle */
-td > div::-webkit-scrollbar-thumb {
+.description::-webkit-scrollbar-thumb {
   background-color: #585858;
   border-radius: 10px;
   cursor: pointer;
@@ -512,4 +542,109 @@ td .product-info img {
   width: 50px;
   height: 50px;
   border-radius: 1000px;
+}
+
+.notification {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  background-color: #6052ff;
+  border-radius: 0 0 0 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  transition: 0.3s ease-in-out;
+  z-index: 1000;
+  font-size: 20px;
+  color: white;
+  font-weight: 600;
+}
+
+.notification.hide {
+  right: -300px;
+}
+
+/* Tabs */
+.tab {
+  overflow: hidden;
+  background-color: #f1f1f1;
+  width: max-content;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+  border-radius: 0;
+  color: black;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: var(--primary);
+  color: white;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Overriding saved products style */
+.user {
+  align-items: flex-start;
+  padding: 20px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.user .product-name {
+  height: max-content;
+}
+
+.user .product-image {
+  width: 100px;
+  height: 100px;
+  margin: 0;
+}
+
+.user .product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.btn-danger {
+  background-color: #ff0000;
+  border-color: #ff0000;
+}
+
+.product-actions {
+  margin-left: auto;
+}
+
+.comparison-chart .table {
+  width: 100%;
+  overflow-x: scroll;
+}
+
+.comparison-chart .table::-webkit-scrollbar {
+  height: 5px;
 }

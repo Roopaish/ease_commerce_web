@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="author" content="">
+  <meta name="description" content="">
+  <meta name="keyword" content="">
+  <title>Ease-commerce | Profile</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <link href="https://cdn.lineicons.com/3.0/lineicons.css" rel="stylesheet">
+  <link rel="stylesheet" href="./styles/base.css" />
+  <link rel="stylesheet" href="./styles/components.css" />
+  <link rel="stylesheet" href="./styles/form.css" />
+
+  <script src="./status.js" defer></script>
+  <script src="./user.js" defer></script>
+</head>
+
+<body>
+  <div class="auth-wrapper">
+    <div class="auth-container auth-form" id="auth-container">
+      <div class="form-container sign-up-container">
+        <form id="signup-form">
+          <h1>Create Account</h1>
+          <input type="text" name="signup-name" placeholder="Username" required />
+          <input type="email" name="signup-email" placeholder="Email" required />
+          <input type="password" name="signup-password" placeholder="Password" required />
+          <button>Sign Up</button>
+          <span id="signIn-alt" class="alt-text">Already have a account?</span>
+        </form>
+      </div>
+      <div class="form-container sign-in-container">
+        <form id="signin-form">
+          <h1>Sign in</h1>
+          <input type="name" name="signin-name" placeholder="Username" required />
+          <input type="password" name="signin-password" placeholder="Password" required />
+          <button>Sign In</button>
+          <span id="signUp-alt" class="alt-text">New user?</span>
+        </form>
+      </div>
+      <div class="overlay-container">
+        <div class="overlay">
+          <div class="overlay-panel overlay-left">
+            <h1>Welcome Back!</h1>
+            <p>To keep connected with us please login with your personal info</p>
+            <button class="ghost" id="signIn">Sign In</button>
+          </div>
+          <div class="overlay-panel overlay-right">
+            <h1>Hello, there!</h1>
+            <p>Enter your personal details and start journey with us</p>
+            <button class="ghost" id="signUp">Sign Up</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-layout container" id="user-layout">
+    <header>
+      <div class="container flex" style="align-items: flex-start;">
+        <div class="flex justify-start wrap" style="text-align: start;">
+          <figure class="user-image-wrapper">
+            <a href="/">
+              <img src="https://picsum.photos/40" class="user-image" id="user-image" alt="user" />
+            </a>
+          </figure>
+          <div class="user-info">
+            <h3 class="user-name">
+              name
+            </h3>
+            <div class="user-email">Email</div>
+          </div>
+        </div>
+
+        <button id="logout" style="background: red; border-color: red;">Log out</button>
+      </div>
+    </header>
+
+    <main>
+      <div>
+        <!-- Create two tabs -->
+        <div class="tab">
+          <button class="tab-links active" data-target="products">Products</button>
+          <button class="tab-links" data-target="comparisons">Comparisons</button>
+        </div>
+      </div>
+      <div class="tab-content active" id="products">
+        <section class=" content">
+
+        </section>
+      </div>
+      <div class="tab-content" id="comparisons">
+        <section class="content">
+
+        </section>
+      </div>
+    </main>
+
+  </div>
+
+  <div class="notification hide"></div>
+
+</body>
+
+</html>

@@ -11,11 +11,11 @@ const ProductSchema = new mongoose.Schema(
     name: {
       type: String,
     },
-    nid: {
+    id: {
       type: String,
     },
     sellerName: {
-      type: Number,
+      type: String,
     },
     description: {
       type: [String],
@@ -24,13 +24,13 @@ const ProductSchema = new mongoose.Schema(
       type: String,
     },
     price: {
-      type: Number,
+      type: String,
     },
     ratingScore: {
-      type: Number,
+      type: String,
     },
     review: {
-      type: Number,
+      type: String,
     },
   },
   { timestamps: true }

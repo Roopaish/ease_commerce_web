@@ -2,7 +2,6 @@ import axios from "axios";
 import cheerio from "cheerio";
 
 export const getDarazProducts = async (req, res, next) => {
-  console.log(req.params.product);
   try {
     const searchUrl = `https://www.daraz.com.np/catalog/?q=${req.params.product}`;
 
@@ -20,7 +19,7 @@ export const getDarazProducts = async (req, res, next) => {
         image: el.image,
         priceShow: el.priceShow,
         name: el.name,
-        nid: el.nid,
+        id: el.nid,
         sellerName: el.sellerName,
         description: el.description,
         productUrl: el.productUrl,
@@ -40,8 +39,6 @@ export const getDarazProducts = async (req, res, next) => {
 };
 
 export const getAmazonProducts = async (req, res, next) => {
-  console.log(req.params.product);
-
   try {
     const searchUrl = `https://www.amazon.com/s?k=${req.params.product}`;
 
@@ -72,7 +69,7 @@ export const getAmazonProducts = async (req, res, next) => {
             ? null
             : `$ ${price} ~ Rs, ${Math.round(price.replaceAll(",", "") * 130)}`,
         name: descArray[0],
-        nid: nid,
+        id: nid,
         sellerName: "",
         description: descArray,
         productUrl: "https://www.amazon.com/" + link,
@@ -87,8 +84,6 @@ export const getAmazonProducts = async (req, res, next) => {
       listItems: items,
     });
   } catch (err) {
-    console.log(err);
-
     next(err);
   }
 };

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
   <meta name="author" content="">
   <meta name="description" content="">
-  <meta name="keyword" content={{ keyword }}>
+  <meta name="keyword" content="">
   <title>ease_commerce</title>
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
@@ -20,17 +20,22 @@
   <link rel="stylesheet" href="./styles/base.css" />
   <link rel="stylesheet" href="./styles/components.css" />
 
-  <script src="app.js" defer></script>
+  <script src="./status.js" defer></script>
+  <script src="./app.js" defer></script>
 
 <body class="fancy-scroll-bar">
   <header>
-    <div class="container">
-      <form class="search-form flex">
+    <div class="container flex">
+      <figure class="user-image-wrapper">
+        <a href="/user.html">
+          <img src="https://picsum.photos/40" class="user-image" id="user-image" alt="user" />
+        </a>
+      </figure>
+      <form class="search-form" style="flex-grow: 1;">
         <div class="search-box flex justify-start">
           <i class="lni lni-search-alt "></i>
           <input type="text" placeholder="Search for products" value="laptop" />
         </div>
-
       </form>
     </div>
   </header>
@@ -60,6 +65,7 @@
         </div>
         <div class="products-carousel">
           <div class="content fancy-scroll-bar"></div>
+        </div>
       </section>
 
       <section class="amazon">
@@ -82,6 +88,9 @@
   <div class="modal fancy-scroll-bar">
 
   </div>
+
+  <div class="notification hide"></div>
+
 </body>
 
 </html>
