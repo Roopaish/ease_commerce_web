@@ -36,6 +36,7 @@ app.use(
     origin: true,
     credentials: true,
     exposedHeaders: ["set-cookie"],
+    sameSite: "none",
   })
 );
 
