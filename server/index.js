@@ -35,7 +35,6 @@ app.use(
   cors({
     origin: true,
     credentials: true, // Allow requests with credentials (cookies, authorization headers, etc.)
-    allowedHeaders: ["Set-Cookie"],
   })
 );
 
