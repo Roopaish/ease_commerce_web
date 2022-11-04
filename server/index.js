@@ -31,11 +31,13 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Enable cors
-app.use(cors({
-  origin: true,
-  credentials: true,
-}));
-
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+    exposedHeaders: ["set-cookie"],
+  })
+);
 
 // registering routes
 app.use("/api/auth", authRoutes);
