@@ -33,10 +33,9 @@ app.use(cookieParser());
 // Enable cors
 app.use(
   cors({
-    origin: true,
-    credentials: true,
-    exposedHeaders: ["set-cookie"],
-    sameSite: "none",
+    origin: "*", // Allow requests from any origin
+    credentials: true, // Allow requests with credentials (cookies, authorization headers, etc.)
+    // save cookie in browser
   })
 );
 
