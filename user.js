@@ -32,6 +32,26 @@ signupForm.addEventListener("submit", (e) => {
   const email = signupForm["signup-email"].value;
   const password = signupForm["signup-password"].value;
 
+  let error = false;
+
+  if (name == "" || email == "" || password == "") {
+    showNotification("Please fill in all fields");
+    error = true;
+  }
+  
+  if (name.length < 3 || name.match(/^[A-Za-z]+$/) == null) {
+    showNotification("Username should only contain letters and should be minimum 3 characters long");
+    error = true;
+  }
+
+  if (password.length < 6 || password.match(/^[A-Za-z0-9]+$/) == null) {
+    showNotification("Password should be minimum 6 characters long and should only contain letters and numbers");
+    error = true;
+  }
+
+  if (error) return;
+    
+
   fetch(`${apiUrl}api/auth/signup`, {
     method: "POST",
     headers: {
@@ -56,7 +76,9 @@ signupForm.addEventListener("submit", (e) => {
         container.classList.remove("right-panel-active");
         showNotification("Account Created! Login to continue");
       }
-    });
+    }
+    );
+  
 });
 
 // Logging in
