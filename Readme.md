@@ -10,6 +10,6 @@ JWT = {JWTToken}
 - `cd server`
 - `npm run start`
 
-## Demo
+## Demo (Takes time to load)
 
 ![](./demo.gif)
